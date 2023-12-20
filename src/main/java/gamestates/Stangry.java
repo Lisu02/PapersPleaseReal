@@ -2,7 +2,7 @@ package gamestates;
 
 public enum Stangry {
 
-    GRANIE,MENU;
+    GRANIE,MENU,OPTIONS,QUIT;
 
     public static Stangry state = GRANIE;
 }

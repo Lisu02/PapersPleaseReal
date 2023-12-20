@@ -9,8 +9,10 @@ public class Paszport {
 
     private String imie,nazwisko;
     private BufferedImage paszport;
-    int x=0,y=0;
+    int xPos=0,yPos=0;
     int szerokosc=260,wysokosc=324;
+    Point lokalizacja;
+    Point poprzedniaLokalizacja;
 
 
     public Paszport(String imie,String nazwisko){
@@ -37,7 +39,7 @@ public class Paszport {
     }
 
     public void renderuj(Graphics g){
-        g.drawImage(paszport,x,y,szerokosc,wysokosc,null);
+        g.drawImage(paszport,xPos,yPos,szerokosc,wysokosc,null);
     }
 
 }

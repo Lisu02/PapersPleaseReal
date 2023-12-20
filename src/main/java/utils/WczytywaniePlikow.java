@@ -17,6 +17,11 @@ public class WczytywaniePlikow {
     public static final String POZWOLENIE_NA_WJAZD2 = "entry_permit_empty.png";
     public static final String GRA_WYGLAD = "outside_sprites.png";
 
+    public static final String PRZYCISK_GRA = "button_atlas.png";
+    public static final String PRZYCISK_MENU = "button_atlas.png";
+
+    //TEST
+    public static final String MENU_BACKGROUND_ATLAS = "menu_background.png";
     public static BufferedImage GetSpriteAtlas(String nazwaPliku){
         BufferedImage img = null;
         InputStream is = WczytywaniePlikow.class.getResourceAsStream("/" + nazwaPliku);
