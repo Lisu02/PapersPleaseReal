@@ -77,7 +77,6 @@ public class Granie extends Stan implements Metodystanu {
             }
         }
         resetButtons();
-
     }
 
     private void resetButtons() {
