@@ -23,7 +23,7 @@ public class HandlerPoziomu {
     }
 
     public void rysuj(Graphics g){
-        g.drawImage(poziomSprite,200,200,384,128,null);
+        g.drawImage(poziomSprite,300,300,384,128,null);
     }
 
     public void aktualizuj(){

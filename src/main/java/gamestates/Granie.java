@@ -46,8 +46,8 @@ public class Granie extends Stan implements Metodystanu {
         handlerPoziomu.rysuj(g);
         paszport.renderuj(g);
 
-        for(GraPrzycisk mb : przyciski){
-            mb.rysuj(g);
+        for(GraPrzycisk gp : przyciski){
+            gp.rysuj(g);
         }
     }
 
@@ -61,6 +61,7 @@ public class Granie extends Stan implements Metodystanu {
         for(GraPrzycisk gp : przyciski){
             if(isIn(e,gp)){
                 gp.setMousePressed(true);
+                System.out.println("Wcisniety przycisk w ramce");
                 break;
             }
         }
@@ -98,4 +99,6 @@ public class Granie extends Stan implements Metodystanu {
             }
         }
     }
+
+
 }

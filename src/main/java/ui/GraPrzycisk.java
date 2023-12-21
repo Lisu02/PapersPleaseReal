@@ -36,9 +36,9 @@ public class GraPrzycisk {
     }
 
     private void loadImages() {
-        images = new BufferedImage[2];
+        images = new BufferedImage[3];
         BufferedImage tmp = WczytywaniePlikow.GetSpriteAtlas(WczytywaniePlikow.PRZYCISK_GRA);
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < images.length; i++) {
             images[i] = tmp.getSubimage(i*B_WIDTH_DEFAULT,columnIndex*B_HEIGHT_DEFAULT,B_WIDTH_DEFAULT,B_HEIGHT_DEFAULT);
 
         }
@@ -46,6 +46,7 @@ public class GraPrzycisk {
 
     public void rysuj(Graphics g){
         g.drawImage(images[index],xPos, yPos - yOffsetCenter,B_WIDTH,B_HEIGHT,null);
+
     }
 
     public void update(){

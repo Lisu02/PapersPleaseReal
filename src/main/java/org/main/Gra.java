@@ -58,6 +58,7 @@ public class Gra implements Runnable{
         switch (Stangry.state){
             case MENU -> menu.aktualizuj();
             case GRANIE -> granie.aktualizuj();
+            case QUIT,OPTIONS -> System.exit(0);
         }
     }
 
@@ -105,11 +106,18 @@ public class Gra implements Runnable{
                 updates = 0;
             }
         }
+    }
 
+    public Gra getGra(){
+        return this;
+    }
 
+    public Menu getMenu() {
+        return menu;
+    }
 
-
-
+    public Granie getGranie(){
+        return granie;
     }
 
 }
