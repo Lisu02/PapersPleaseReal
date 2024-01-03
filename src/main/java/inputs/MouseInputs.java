@@ -1,5 +1,6 @@
 package inputs;
 
+import gamestates.Stan;
 import gamestates.Stangry;
 import org.main.GraPanel;
 
@@ -50,6 +51,9 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        switch (Stangry.state){
+            case GRANIE -> graPanel.getGra().getGranie().mouseDragged(e);
+        }
 
     }
 

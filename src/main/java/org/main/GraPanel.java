@@ -7,8 +7,9 @@ import java.awt.*;
 
 public class GraPanel extends JPanel {
 
-    private MouseInputs mouseInputs;
+    private MouseInputs mouseInputs; //ZCZYTUJE MYSZKE
     Gra gra;
+
     public GraPanel(Gra gra){
         mouseInputs = new MouseInputs(this);
         this.gra = gra;

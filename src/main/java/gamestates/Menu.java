@@ -77,4 +77,9 @@ public class Menu extends Stan implements Metodystanu{
         }
 
     }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
 }

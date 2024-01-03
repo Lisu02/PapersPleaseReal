@@ -11,8 +11,10 @@ import java.awt.event.MouseEvent;
 
 public class Granie extends Stan implements Metodystanu {
 
-    private HandlerPoziomu handlerPoziomu;
-    private Paszport paszport;
+    private HandlerPoziomu handlerPoziomu; //OBSŁUGA TŁA POZIOMU
+    private Paszport paszport; //paszport OBSŁUGA PRZESUWANIA
+
+    //TODO LISTA PASZPORT DOKUMENTY ITP
     private GraPrzycisk[] przyciski = new GraPrzycisk[2];
 
     public Granie(Gra gra) {
@@ -56,6 +58,8 @@ public class Granie extends Stan implements Metodystanu {
 
     }
 
+
+
     @Override
     public void mousePressed(MouseEvent e) {
         for(GraPrzycisk gp : przyciski){
@@ -64,6 +68,9 @@ public class Granie extends Stan implements Metodystanu {
                 System.out.println("Wcisniety przycisk w ramce");
                 break;
             }
+        }
+        if(isIn(e,paszport)){
+            System.out.println("Wcisniety paszport");
         }
     }
 
@@ -96,6 +103,13 @@ public class Granie extends Stan implements Metodystanu {
                 gp.setMouseOver(true);
                 break;
             }
+        }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if(isIn(e,paszport)){
+            paszport.mouseDragged(e);
         }
     }
 
