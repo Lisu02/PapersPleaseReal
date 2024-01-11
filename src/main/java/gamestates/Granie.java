@@ -1,6 +1,8 @@
 package gamestates;
 
 import entities.Paszport;
+import entities.PozwolenieNaWjazd;
+import entities.RamieZatwierdzaniaOdrzucania;
 import level.HandlerPoziomu;
 import org.main.Gra;
 import ui.GraPrzycisk;
@@ -13,7 +15,8 @@ public class Granie extends Stan implements Metodystanu {
 
     private HandlerPoziomu handlerPoziomu; //OBSŁUGA TŁA POZIOMU
     private Paszport paszport; //paszport OBSŁUGA PRZESUWANIA
-
+    private PozwolenieNaWjazd pozwolenieNaWjazd;
+    private RamieZatwierdzaniaOdrzucania ramie;
     //TODO LISTA PASZPORT DOKUMENTY ITP
     private GraPrzycisk[] przyciski = new GraPrzycisk[2];
 
@@ -32,12 +35,16 @@ public class Granie extends Stan implements Metodystanu {
     private void wczytajKlasy(){
         handlerPoziomu = new HandlerPoziomu(gra);
         paszport = new Paszport();
+        pozwolenieNaWjazd = new PozwolenieNaWjazd();
+        ramie = new RamieZatwierdzaniaOdrzucania();
     }
 
     @Override
     public void aktualizuj() {
         handlerPoziomu.aktualizuj();
+        pozwolenieNaWjazd.aktualizuj();
         paszport.aktualizuj();
+
         for (GraPrzycisk gp: przyciski){
             gp.update();
         }
@@ -46,7 +53,10 @@ public class Granie extends Stan implements Metodystanu {
     @Override
     public void rysuj(Graphics g) {
         handlerPoziomu.rysuj(g);
+        pozwolenieNaWjazd.renderuj(g);
         paszport.renderuj(g);
+        ramie.renderuj(g);
+
 
         for(GraPrzycisk gp : przyciski){
             gp.rysuj(g);
@@ -55,6 +65,7 @@ public class Granie extends Stan implements Metodystanu {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+
 
     }
 
@@ -71,11 +82,17 @@ public class Granie extends Stan implements Metodystanu {
         }
         if(isIn(e,paszport)){
             System.out.println("Wcisniety paszport");
+            paszport.mousePressed(e);
+        }
+
+        if(isIn(e,pozwolenieNaWjazd)){
+            pozwolenieNaWjazd.mousePressed(e);
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+
         for(GraPrzycisk gp : przyciski){
             if(isIn(e,gp)){
                 if(gp.isMousePressed()){
@@ -84,6 +101,8 @@ public class Granie extends Stan implements Metodystanu {
             }
         }
         resetButtons();
+        paszport.mouseReleased(e);
+        pozwolenieNaWjazd.mouseReleased(e);
     }
 
     private void resetButtons() {
@@ -110,6 +129,10 @@ public class Granie extends Stan implements Metodystanu {
     public void mouseDragged(MouseEvent e) {
         if(isIn(e,paszport)){
             paszport.mouseDragged(e);
+        }
+
+        if(isIn(e,pozwolenieNaWjazd)){
+            pozwolenieNaWjazd.mouseDragged(e);
         }
     }
 

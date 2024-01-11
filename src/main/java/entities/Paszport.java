@@ -35,12 +35,13 @@ public class Paszport implements MouseMotionListener, MouseListener {
     int xPos=400,yPos=234; //POZYCJA W ROGU DOKUMENTOW
     int szerokosc=260,wysokosc=324;
     private Rectangle bounds;
-    boolean przesuwanie = false;
     private boolean mouseOver = false;
 
+    private boolean przesuwanieDokumentu = false;
+    private int przesuniecieX, przesuniecieY;
+
     //TODO:LEPSZEPRZESUWANIE ZMIENNE
-    Point lokalizacja;
-    Point poprzedniaLokalizacja;
+
 
     private void initBounds() {
         bounds = new Rectangle(xPos, yPos, szerokosc,wysokosc); //TODO:>?>
@@ -65,7 +66,8 @@ public class Paszport implements MouseMotionListener, MouseListener {
 
     private void wczytajObrazPaszportu(){
         //TODO: DO ROZWINIĘCIA Z ZATWIERDZONYMI I ODRZUCONYMI PASZPORTAMI
-        BufferedImage img = WczytywaniePlikow.GetSpriteAtlas(WczytywaniePlikow.PASZPORT_ARZTOCKA);
+        BufferedImage img = WczytywaniePlikow.GetSpriteAtlas("PassportInnerArstotzka.png");
+        //PassportInnerArstotzka.png
         paszport = img;
     }
 
@@ -111,13 +113,19 @@ public class Paszport implements MouseMotionListener, MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         //TODO: LEPSZE PRZESUWANIE
-        poprzedniaLokalizacja = e.getPoint();
-        przesuwanie = true;
+        Point punkt = e.getPoint();
+
+        if (getBounds().contains(punkt)) {
+            przesuwanieDokumentu = true;
+            przesuniecieX = punkt.x - getxPos();
+            przesuniecieY = punkt.y - getyPos();
+        }
+
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        przesuwanie = false;
+        przesuwanieDokumentu = false;
     }
 
     @Override
@@ -131,18 +139,22 @@ public class Paszport implements MouseMotionListener, MouseListener {
     @Override
     public void mouseDragged(MouseEvent e) {
         //1280 i 720
-//        if(przesuwanie){
-//            Point aktualnaLokalizacja = e.getPoint();
-//            this.p
-//        }
-        if( (e.getX() <=GAME_WIDTH) && (e.getX() >= 0) && (e.getY() < GAME_HEIGHT) && (e.getY() >= 0)){
-            xPos=e.getX() -60;
-            yPos=e.getY() -50;
-            initBounds();
+        if( (e.getX()  <= GAME_WIDTH) && (e.getX() >= 0) && (e.getY() - 50 < GAME_HEIGHT) && (e.getY() - 50 >= 0)){
+            //WARUNKI W IF DO WERYFIKACJI
+            if (przesuwanieDokumentu) {
+                int noweX = e.getX() - przesuniecieX;
+                int noweY = e.getY() - przesuniecieY;
+                if(noweX + 260 < GAME_WIDTH && noweX > 0){
+                    setxPos(noweX);
+                }
+                if(noweY + 324 < GAME_HEIGHT && noweY >= 0){
+                    setyPos(noweY);
+                }
+                initBounds();
+            }
+        }else{
+
         }
-
-        //System.out.println(e.getX() + " oraz " + e.getY());
-
     }
 
     @Override
