@@ -141,7 +141,7 @@ public class Paszport implements MouseMotionListener, MouseListener {
             initBounds();
         }
 
-        System.out.println(e.getX() + " oraz " + e.getY());
+        //System.out.println(e.getX() + " oraz " + e.getY());
 
     }
 
