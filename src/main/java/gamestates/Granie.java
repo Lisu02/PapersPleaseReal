@@ -1,8 +1,6 @@
 package gamestates;
 
-import entities.Paszport;
-import entities.PozwolenieNaWjazd;
-import entities.RamieZatwierdzaniaOdrzucania;
+import entities.*;
 import level.HandlerPoziomu;
 import org.main.Gra;
 import ui.GraPrzycisk;
@@ -14,9 +12,17 @@ import java.awt.event.MouseEvent;
 public class Granie extends Stan implements Metodystanu {
 
     private HandlerPoziomu handlerPoziomu; //OBSŁUGA TŁA POZIOMU
+
+    //DOKUMENTY
     private Paszport paszport; //paszport OBSŁUGA PRZESUWANIA
     private PozwolenieNaWjazd pozwolenieNaWjazd;
+    private DowodOsobisty dowodOsobisty;
+
+
+
+
     private RamieZatwierdzaniaOdrzucania ramie;
+
     //TODO LISTA PASZPORT DOKUMENTY ITP
     private GraPrzycisk[] przyciski = new GraPrzycisk[2];
 
@@ -34,16 +40,19 @@ public class Granie extends Stan implements Metodystanu {
 
     private void wczytajKlasy(){
         handlerPoziomu = new HandlerPoziomu(gra);
-        paszport = new Paszport();
+        Petent petent = new Petent();
+        paszport = petent.getPaszport();
         pozwolenieNaWjazd = new PozwolenieNaWjazd();
         ramie = new RamieZatwierdzaniaOdrzucania();
+        dowodOsobisty = new DowodOsobisty();
     }
 
     @Override
     public void aktualizuj() {
-        handlerPoziomu.aktualizuj();
+        handlerPoziomu.aktualizuj(); //Aktualizowanie dynamicznego tła
         pozwolenieNaWjazd.aktualizuj();
         paszport.aktualizuj();
+        dowodOsobisty.aktualizuj();
 
         for (GraPrzycisk gp: przyciski){
             gp.update();
@@ -56,6 +65,7 @@ public class Granie extends Stan implements Metodystanu {
         pozwolenieNaWjazd.renderuj(g);
         paszport.renderuj(g);
         ramie.renderuj(g);
+        dowodOsobisty.renderuj(g);
 
 
         for(GraPrzycisk gp : przyciski){
@@ -88,6 +98,10 @@ public class Granie extends Stan implements Metodystanu {
         if(isIn(e,pozwolenieNaWjazd)){
             pozwolenieNaWjazd.mousePressed(e);
         }
+
+        if(isIn(e,dowodOsobisty)){
+            dowodOsobisty.mousePressed(e);
+        }
     }
 
     @Override
@@ -96,6 +110,8 @@ public class Granie extends Stan implements Metodystanu {
         for(GraPrzycisk gp : przyciski){
             if(isIn(e,gp)){
                 if(gp.isMousePressed()){
+                    Petent petent = new Petent();
+                    paszport = petent.getPaszport();
                     break;
                 }
             }
@@ -103,6 +119,7 @@ public class Granie extends Stan implements Metodystanu {
         resetButtons();
         paszport.mouseReleased(e);
         pozwolenieNaWjazd.mouseReleased(e);
+        dowodOsobisty.mouseReleased(e);
     }
 
     private void resetButtons() {
@@ -133,6 +150,10 @@ public class Granie extends Stan implements Metodystanu {
 
         if(isIn(e,pozwolenieNaWjazd)){
             pozwolenieNaWjazd.mouseDragged(e);
+        }
+
+        if(isIn(e,dowodOsobisty)){
+            dowodOsobisty.mouseDragged(e);
         }
     }
 

@@ -1,7 +1,6 @@
 package gamestates;
 
-import entities.Paszport;
-import entities.PozwolenieNaWjazd;
+import entities.Dokument;
 import org.main.Gra;
 import ui.GraPrzycisk;
 import ui.MenuPrzycisk;
@@ -21,8 +20,10 @@ public class Stan {
         return mp.getBounds().contains(e.getX(),e.getY());
     }
 
-    public boolean isIn(MouseEvent e, Paszport paszport){return paszport.getBounds().contains(e.getX(),e.getY());}
-    public boolean isIn(MouseEvent e, PozwolenieNaWjazd pozwolenieNaWjazd){return pozwolenieNaWjazd.getBounds().contains(e.getX(),e.getY());}
+    //public boolean isIn(MouseEvent e, Paszport paszport){return paszport.getBounds().contains(e.getX(),e.getY());}
+
+    public boolean isIn(MouseEvent e , Dokument dokument){return dokument.getBounds().contains(e.getX(),e.getY());}
+   // public boolean isIn(MouseEvent e, PozwolenieNaWjazd pozwolenieNaWjazd){return pozwolenieNaWjazd.getBounds().contains(e.getX(),e.getY());}
 
     public Gra getGra(){return gra;}
 }

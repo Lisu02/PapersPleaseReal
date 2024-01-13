@@ -15,11 +15,19 @@ public class WczytywaniePlikow {
 
 
     //DOKUMENTY
-    public static final String PASZPORT_ARZTOCKA = "ARZTOCKA_PASSPORT_TOFILL.png";
-    public static final String PASZPORT_KOLECHIA = "Kolechia_passport.png";
-    public static final String PASZPORT_REPUBLIA = "Republia_passport.png";
+    public static final String PASZPORT_ARZTOCKA_DUZY = "PassportInnerArstotzka.png";
+    public static final String PASZPORT_ARZTOCKA_MALY = "PassportOuterArstotzka.png";
+    public static final String PASZPORT_KOLECHIA_DUZY = "PassportInnerKolechia.png";
+    public static final String PASZPORT_KOLECHIA_MALY = "PassportOuterKolechia.png";
+    public static final String PASZPORT_ZJEDONOCZNA_FED_DUZY = "PassportInnerUnitedFed.png";
+    public static final String PASZPORT_ZJEDONOCZONA_FED_MALY = "PassportOuterUnitedFed.png";
+
     public static final String POZWOLENIE_NA_WJAZD1 = "Entry_permit.png";
     public static final String POZWOLENIE_NA_WJAZD2 = "entry_permit_empty.png";
+
+    public static final String DOWOD_OSOBISTY_DUZY = "IdCardInner.png";
+    public static final String DOWOD_OSOBISTY_MALY = "IdCardOuter.png";
+
     public static final String GRA_WYGLAD = "tlo_gry.png";
 
     //PRZYCISKI

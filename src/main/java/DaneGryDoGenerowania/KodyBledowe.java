@@ -1,4 +1,4 @@
-package org.example.DaneGryDoGenerowania;
+package DaneGryDoGenerowania;
 import java.util.Random;
 public class KodyBledowe {
 

@@ -9,12 +9,14 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.Collection;
 
+import static DaneGryDoGenerowania.ImionaPetentow.getImie;
+import static DaneGryDoGenerowania.ImionaPetentow.getNazwisko;
 import static org.main.Gra.GAME_HEIGHT;
 import static org.main.Gra.GAME_WIDTH;
 import static utils.Stale.UI.Przyciski.B_HEIGHT;
 import static utils.Stale.UI.Przyciski.B_WIDTH;
 
-public class Paszport implements MouseMotionListener, MouseListener {
+public class Paszport extends Dokument{
 
 
     //DANE NA PASZPORCIE
@@ -23,146 +25,128 @@ public class Paszport implements MouseMotionListener, MouseListener {
     private String plec;
     private String miejsceWydania;
     private String dataWaznosci;
+    private String kodPaszportu;
+    private String krajPochodzenia;
 
     //OBRAZY NA PASZPORCIE
-    private BufferedImage paszport;
     private BufferedImage zdjeciePaszportowe;
     private BufferedImage zdjecieDecyzjiZatwierdzeniaPaszportu;
     private final Font fontDokumentow = WczytywaniePlikow.wczytajFont(WczytywaniePlikow.FONT_DO_DOKUMENTOW,15f);
 
 
     //wieklość i lokalizacja paszportu
-    int xPos=400,yPos=234; //POZYCJA W ROGU DOKUMENTOW
-    int szerokosc=260,wysokosc=324;
-    private Rectangle bounds;
-    private boolean mouseOver = false;
-
-    private boolean przesuwanieDokumentu = false;
-    private int przesuniecieX, przesuniecieY;
-
-    //TODO:LEPSZEPRZESUWANIE ZMIENNE
+    //int xPos=400,yPos=234; //POZYCJA W ROGU DOKUMENTOW
+//    int szerokosc=260,wysokosc=324;
 
 
-    private void initBounds() {
-        bounds = new Rectangle(xPos, yPos, szerokosc,wysokosc); //TODO:>?>
+
+    protected void initBounds() {
+        super.initBounds();
     }
 
 
-
-    public Paszport(String imie,String nazwisko){
-        this.imie = imie;
-        this.nazwisko = nazwisko;
-        wczytajObrazPaszportu();
-        //initBounds();
-        //KONSTRUKOTR DO TESTÓW
-    }
     public Paszport(){
-        this.imie = "Mykolski";
-        this.nazwisko  ="Wladimir";
-        wczytajObrazPaszportu();
-        //initBounds();
-        //AUTO GENEROWANIE DANYCH
-    }
+        //Lokalizacja paszportu
+        xPos = 400;
+        yPos = 234;
+        //Stan paszportu (czy w wersji małej czy dużej)
 
-    private void wczytajObrazPaszportu(){
-        //TODO: DO ROZWINIĘCIA Z ZATWIERDZONYMI I ODRZUCONYMI PASZPORTAMI
-        BufferedImage img = WczytywaniePlikow.GetSpriteAtlas("PassportInnerArstotzka.png");
-        //PassportInnerArstotzka.png
-        paszport = img;
+        this.imie = getImie();
+        this.nazwisko  = getNazwisko();
+        this.dataUrodzenia = "26/08/2002";
+        this.plec = "M";
+        this.miejsceWydania = "Bialystok";
+        this.dataWaznosci = "31/03/2015";
+        this.kodPaszportu = "ABCD-1234";
     }
 
     public void aktualizuj(){
-        initBounds();
+        super.aktualizuj();
         //Aktualizowanie pozycji lub stanu zatwierdzenia paszportu
-        if(mouseOver){
-            System.out.println("jest nad paszportem!");
-        }
     }
 
+    @Override
     public void renderuj(Graphics g){
-        g.drawImage(paszport,xPos,yPos,szerokosc,wysokosc,null);
-
-        g.setColor(new Color(87,72,72));
-        g.setFont(fontDokumentow);
-        String fullname = this.imie + ", " + this.nazwisko;
-        g.drawString(fullname,xPos + 15,yPos + 187);
-
-        g.drawString("26/08/2002",xPos + 135,yPos + 208);
-        g.drawString("M",xPos + 135,yPos + 223);
-        g.drawString("Bialystok",xPos + 135,yPos + 238);
-        g.drawString("31/03/2015",xPos + 135,yPos + 256);
-        g.drawString("ABCD-1234",xPos + 15,yPos + 308);
+        super.renderuj(g);
 
 
+        if(aktualneZdjecie == zdjecieDokumentu){
+            g.setColor(new Color(87,72,72));
+            g.setFont(fontDokumentow);
+            String fullname = this.imie + ", " + this.nazwisko;
 
-    }
+            int imieX = xPos + 15,imieY = yPos + 187;
+            int daneX = xPos + 135,daneY = yPos + 208;
+            int kodX = xPos + 15,kodY = yPos + 308;
 
-    public int getxPos(){return xPos;}
-    public int getyPos(){return yPos;}
-
-    public void setxPos(int xPos){this.xPos = xPos;}
-    public void setyPos(int yPos){this.yPos = yPos;}
-
-
-    //IMPLEMENTACJA MYSZKI
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        //TODO: LEPSZE PRZESUWANIE
-        Point punkt = e.getPoint();
-
-        if (getBounds().contains(punkt)) {
-            przesuwanieDokumentu = true;
-            przesuniecieX = punkt.x - getxPos();
-            przesuniecieY = punkt.y - getyPos();
-        }
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        przesuwanieDokumentu = false;
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-        //1280 i 720
-        if( (e.getX()  <= GAME_WIDTH) && (e.getX() >= 0) && (e.getY() - 50 < GAME_HEIGHT) && (e.getY() - 50 >= 0)){
-            //WARUNKI W IF DO WERYFIKACJI
-            if (przesuwanieDokumentu) {
-                int noweX = e.getX() - przesuniecieX;
-                int noweY = e.getY() - przesuniecieY;
-                if(noweX + 260 < GAME_WIDTH && noweX > 0){
-                    setxPos(noweX);
-                }
-                if(noweY + 324 < GAME_HEIGHT && noweY >= 0){
-                    setyPos(noweY);
-                }
-                initBounds();
+            switch (krajPochodzenia.toUpperCase()){
+                case "ARSTOTZKA":
+                    break;
+                case "ZJEDNOCZONA FEDERACJA":
+                    imieY = yPos + 207;
+                    daneY = daneY + 17;
+                    daneX = daneX + 4;
+                    kodX += 150;
+                    break;
+                case "KOLECHIA":
+                    imieY = yPos + 207;
+                    daneY = daneY + 19;
+                    daneX = daneX + 6;
+                    kodX += 150;
+                    break;
             }
-        }else{
+
+            g.drawString(fullname,imieX,imieY);
+            g.drawString(dataUrodzenia,daneX,daneY);
+            g.drawString(plec,daneX,daneY + 15);
+            g.drawString(miejsceWydania,daneX,daneY + 30);
+            g.drawString(dataWaznosci,daneX,daneY + 48);
+            g.drawString(kodPaszportu,kodX,kodY);
 
         }
     }
 
+
+
+    public void setDanePaszportu(String imie,String nazwisko,String dataUrodzenia,String plec,String miejsceWydania,String dataWaznosci,String kodPaszportu,String krajPochodzenia){
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.dataUrodzenia = dataUrodzenia;
+        this.plec = plec;
+        this.miejsceWydania = miejsceWydania;
+        this.dataWaznosci = dataWaznosci;
+        this.kodPaszportu = kodPaszportu;
+        this.krajPochodzenia = krajPochodzenia;
+        wczytajObrazPaszportu(krajPochodzenia);
+    }
+
+
     @Override
-    public void mouseMoved(MouseEvent e) {
+    public void mouseDragged(MouseEvent e){
+        super.mouseDragged(e);
+
+        if(e.getX() < 390 && aktualneZdjecie != maleZdjecieDokumentu){
+            aktualneZdjecie = maleZdjecieDokumentu;
+            szerokosc -= 190;
+            wysokosc -= 230;
+            xPos = e.getX()-25;
+            yPos = e.getY()-25;
+            Point punkt = e.getPoint();
+            przesuniecieX = punkt.x - xPos;
+            przesuniecieY = punkt.y - yPos;
+            initBounds();
+        } else if (aktualneZdjecie != zdjecieDokumentu && e.getX() >390) {
+            aktualneZdjecie = zdjecieDokumentu;
+            szerokosc += 190;
+            wysokosc += 230;
+            xPos = e.getX()-70;
+            yPos = e.getY()-90;
+            Point punkt = e.getPoint();
+            przesuniecieX = punkt.x - xPos;
+            przesuniecieY = punkt.y - yPos;
+            initBounds();
+        }
 
     }
 
-    public Rectangle getBounds() {
-        return bounds;
-    }
 }

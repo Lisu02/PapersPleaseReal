@@ -1,4 +1,4 @@
-package org.example.DaneGryDoGenerowania;
+package DaneGryDoGenerowania;
 
 import java.util.Objects;
 import java.util.Random;

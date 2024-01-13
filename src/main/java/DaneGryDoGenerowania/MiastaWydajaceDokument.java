@@ -1,4 +1,4 @@
-package org.example.DaneGryDoGenerowania;
+package DaneGryDoGenerowania;
 import java.util.Random;
 public class MiastaWydajaceDokument {
 
@@ -11,7 +11,7 @@ public class MiastaWydajaceDokument {
     public static String getMiasto(String kraj,int kodBledu){
         if(kodBledu != 1){
             return switch (kraj) {
-                case "ARZTOCKA" -> arztockaMiasta[random.nextInt(arztockaMiasta.length)];
+                case "ARSTOTZKA" -> arztockaMiasta[random.nextInt(arztockaMiasta.length)];
                 case "KOLECHIA" -> kolechiaMiasta[random.nextInt(kolechiaMiasta.length)];
                 case "ZJEDNOCZONA FEDERACJA" -> zjednoczFedMiasta[random.nextInt(zjednoczFedMiasta.length)];
                 default -> "";

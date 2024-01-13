@@ -1,4 +1,4 @@
-package org.example.DaneGryDoGenerowania;
+package DaneGryDoGenerowania;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -21,6 +21,7 @@ public class KodPaszportu {
         kodWlasciwy = kodWlasciwy.replace(",","");
         kodWlasciwy = kodWlasciwy.replace("[","");
         kodWlasciwy = kodWlasciwy.replace("]","");
+        kodWlasciwy = kodWlasciwy.replace(" ","");
     return kodWlasciwy;
     }
     public static String giveKodPaszportu(String kodPaszportu,int kodBledu){

@@ -29,14 +29,14 @@ public class DataWaznosci {
         String monthStr = String.format("%02d", month);
         String yearStr = String.valueOf(year);
 
-        return "DO POPRAWY!!!!";
-        //return dayStr + "/" + monthStr + "/" + yearStr;
+
+        return dayStr + "/" + monthStr + "/" + yearStr;
     }
 
-    public static String[] generateRandomDataWaznosciArray() {
-        String dataWaznosciString = generateRandomDataWaznosciString();
-        return dataWaznosciString.split("/");
-    }
+//    public static String[] generateRandomDataWaznosciArray() {
+//        String dataWaznosciString = generateRandomDataWaznosciString();
+//        return dataWaznosciString.split("/");
+//    }
 
 }
 

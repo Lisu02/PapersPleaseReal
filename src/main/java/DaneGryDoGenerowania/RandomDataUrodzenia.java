@@ -1,12 +1,11 @@
-package org.example.DaneGryDoGenerowania;
+package DaneGryDoGenerowania;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class RandomDataUrodzenia {
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
-    public static String[] getDataUrodzenia() {
+    public static String getDataUrodzenia() {
         int year = random.nextInt(2002 - 1980 + 1) + 1980; // Losowy rok między 1980 a 2002
         int month = random.nextInt(12) + 1; // Losowy miesiąc od 1 do 12
         int day;
@@ -30,12 +29,13 @@ public class RandomDataUrodzenia {
         String monthStr = String.format("%02d", month);
         String yearStr = String.valueOf(year);
 
-        return new String[]{dayStr, monthStr, yearStr};
+
+        return dayStr+"/"+monthStr+"/"+yearStr;
     }
 
     public static void main(String[] args) {
-        String[] dataUrodzin = getDataUrodzenia();
-        System.out.println("Losowa data urodzenia: " + Arrays.toString(dataUrodzin));
+        //String[] dataUrodzin = getDataUrodzenia();
+        //System.out.println("Losowa data urodzenia: " + Arrays.toString(dataUrodzin));
     }
 }
 

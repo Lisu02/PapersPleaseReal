@@ -1,8 +1,8 @@
-package org.example.DaneGryDoGenerowania;
+package DaneGryDoGenerowania;
 import java.util.Random;
 public class Panstwa {
 
-    private static String[] tablicaPanstw = {"ARZTOCKA","KOLECHIA","ZJEDNOCZONA FEDERACJA"};
+    private static String[] tablicaPanstw = {"ARSTOTZKA","KOLECHIA","ZJEDNOCZONA FEDERACJA"};
 
     private static Random random = new Random();
     public static String getPanstwo(){

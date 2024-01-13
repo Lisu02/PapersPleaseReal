@@ -1,6 +1,5 @@
 package ui;
 
-import org.main.Gra;
 import utils.WczytywaniePlikow;
 
 import java.awt.*;
@@ -61,6 +60,7 @@ public class GraPrzycisk {
 
     public void setMousePressed(boolean mousePressed) {
         this.mousePressed = mousePressed;
+
     }
 
     public boolean isMouseOver() {
