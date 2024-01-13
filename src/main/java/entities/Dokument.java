@@ -1,5 +1,6 @@
 package entities;
 
+import utils.Dzwieki;
 import utils.WczytywaniePlikow;
 
 import java.awt.*;
@@ -7,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import static org.main.Gra.GAME_HEIGHT;
 import static org.main.Gra.GAME_WIDTH;
@@ -88,17 +90,18 @@ public abstract class Dokument implements MouseMotionListener, MouseListener {
 
     public void renderuj(Graphics g){
 
+        //RYSOWANIE CIENI DOKUMENTOW
         if(przesuwanieDokumentu && aktualneZdjecie == zdjecieDokumentu){
             Color kolorCienia = new Color(0,0,0,100);
             g.setColor(kolorCienia);
-            //g.fillRect(xPos,yPos,10,wysokosc);
             g.fillRect(xPos + 12,yPos + 10,szerokosc,wysokosc);
-        } else if (przesuwanieDokumentu && aktualneZdjecie == maleZdjecieDokumentu) {
+        } else if (przesuwanieDokumentu && aktualneZdjecie == maleZdjecieDokumentu ) {
 
             Color kolorCienia = new Color(0,0,0,100);
             g.setColor(kolorCienia);
             g.fillRect(xPos + 12,yPos + 10,szerokosc,wysokosc);
         }
+
         g.drawImage(aktualneZdjecie,xPos,yPos,szerokosc,wysokosc,null);
     }
 
@@ -113,6 +116,8 @@ public abstract class Dokument implements MouseMotionListener, MouseListener {
 
         Point punkt = e.getPoint();
         if (getBounds().contains(punkt)) {
+            Dzwieki.addDzwieki(Dzwieki.PODNOSZENIE_KARTKI_0);
+            Dzwieki.odtworzDzwiek();
             przesuwanieDokumentu = true;
             przesuniecieX = punkt.x - xPos;
             przesuniecieY = punkt.y - yPos;
@@ -121,6 +126,12 @@ public abstract class Dokument implements MouseMotionListener, MouseListener {
     }
     @Override
     public void mouseReleased(MouseEvent e) {
+        Random random = new Random();
+
+        if(przesuwanieDokumentu){
+//            Dzwieki.addDzwieki(Dzwieki.OPUSZCZANIE_KARTKI_0);
+//            Dzwieki.odtworzDzwiek();
+        }
         przesuwanieDokumentu = false;
     }
     @Override

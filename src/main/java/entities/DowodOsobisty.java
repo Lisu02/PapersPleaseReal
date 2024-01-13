@@ -1,5 +1,6 @@
 package entities;
 
+import utils.Dzwieki;
 import utils.WczytywaniePlikow;
 
 import java.awt.*;
@@ -76,7 +77,9 @@ public class DowodOsobisty extends Dokument{
     public void mouseDragged(MouseEvent e){
         super.mouseDragged(e);
 
-        if(e.getX() < 390 && aktualneZdjecie != maleZdjecieDokumentu){
+
+
+        if(e.getX() < 390 && aktualneZdjecie != maleZdjecieDokumentu && przesuwanieDokumentu){
             aktualneZdjecie = maleZdjecieDokumentu;
             szerokosc -= 160;
             wysokosc -= 100;
@@ -86,7 +89,7 @@ public class DowodOsobisty extends Dokument{
             przesuniecieX = punkt.x - xPos;
             przesuniecieY = punkt.y - yPos;
             initBounds();
-        } else if (aktualneZdjecie != zdjecieDokumentu && e.getX() >390) {
+        } else if (aktualneZdjecie != zdjecieDokumentu && e.getX() >390 && przesuwanieDokumentu) {
             aktualneZdjecie = zdjecieDokumentu;
             szerokosc += 160;
             wysokosc += 100;

@@ -1,5 +1,6 @@
 package ui;
 
+import utils.Dzwieki;
 import utils.WczytywaniePlikow;
 
 import java.awt.*;
@@ -55,6 +56,9 @@ public class GraPrzycisk {
     }
 
     public boolean isMousePressed(){
+        Dzwieki.addDzwieki(Dzwieki.MEGAFON_GRACZ);
+        Dzwieki.ustawGlosnosc(-10); // od -80 do 6 skala głośności
+        Dzwieki.odtworzDzwiek();
         return mousePressed;
     }
 

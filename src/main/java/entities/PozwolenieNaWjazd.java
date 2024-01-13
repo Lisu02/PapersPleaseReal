@@ -1,5 +1,6 @@
 package entities;
 
+import utils.Dzwieki;
 import utils.WczytywaniePlikow;
 
 import java.awt.*;
@@ -10,6 +11,8 @@ import java.awt.image.BufferedImage;
 
 import static org.main.Gra.GAME_HEIGHT;
 import static org.main.Gra.GAME_WIDTH;
+import static utils.WczytywaniePlikow.POZWOLENIE_NA_WJAZD_DUZY;
+import static utils.WczytywaniePlikow.POZWOLENIE_NA_WJAZD_MALY;
 
 public class PozwolenieNaWjazd extends Dokument {
 
@@ -48,8 +51,8 @@ public class PozwolenieNaWjazd extends Dokument {
 
     private void wczytajObrazPozwoleniaNaWjazd(){
         //TODO: DO ROZWINIĘCIA Z ZATWIERDZONYMI I ODRZUCONYMI PASZPORTAMI
-        BufferedImage imgDuze = WczytywaniePlikow.GetSpriteAtlas("EntryPermitInner.png");
-        BufferedImage imgMale = WczytywaniePlikow.GetSpriteAtlas("EntryPermitOuter.png");
+        BufferedImage imgDuze = WczytywaniePlikow.GetSpriteAtlas(POZWOLENIE_NA_WJAZD_DUZY);
+        BufferedImage imgMale = WczytywaniePlikow.GetSpriteAtlas(POZWOLENIE_NA_WJAZD_MALY);
         //PassportInnerArstotzka.png
         zdjecieDokumentu = imgDuze;
         maleZdjecieDokumentu = imgMale;
@@ -69,7 +72,7 @@ public class PozwolenieNaWjazd extends Dokument {
     public void mouseDragged(MouseEvent e){
         super.mouseDragged(e);
 
-        if(e.getX() < 390 && aktualneZdjecie != maleZdjecieDokumentu){
+        if(e.getX() < 390 && aktualneZdjecie != maleZdjecieDokumentu && przesuwanieDokumentu){
             aktualneZdjecie = maleZdjecieDokumentu;
             szerokosc -= 170;
             wysokosc -= 320;
@@ -79,7 +82,7 @@ public class PozwolenieNaWjazd extends Dokument {
             przesuniecieX = punkt.x - xPos;
             przesuniecieY = punkt.y - yPos;
             initBounds();
-        } else if (aktualneZdjecie != zdjecieDokumentu && e.getX() >390) {
+        } else if (aktualneZdjecie != zdjecieDokumentu && e.getX() >390 && przesuwanieDokumentu) {
             aktualneZdjecie = zdjecieDokumentu;
             szerokosc += 170;
             wysokosc += 320;
