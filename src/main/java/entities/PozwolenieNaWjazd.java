@@ -20,7 +20,7 @@ public class PozwolenieNaWjazd extends Dokument {
 
     private BufferedImage stempelPozwolenia;
 
-    private final Font fontDokumentu = WczytywaniePlikow.wczytajFont(WczytywaniePlikow.FONT_DO_DOKUMENTOW,15f);
+    private final Font fontDokumentu = WczytywaniePlikow.wczytajFont(WczytywaniePlikow.FONT_DO_DOKUMENTOW,8f * SCALE);
 
     //int xPos=700,yPos=234; //POZYCJA W ROGU DOKUMENTOW
     //int szerokosc=280,wysokosc=374;
@@ -30,15 +30,19 @@ public class PozwolenieNaWjazd extends Dokument {
 //    private int przesuniecieX, przesuniecieY;
 
     public void setDanePozwoleniaNaWjazd(String imie,String nazwisko,String kodPaszportu,String dataWaznosci) {
-
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.kodPaszportu = kodPaszportu;
+        this.dataWaznosci = dataWaznosci;
     }
 
     @Override
     public void initBounds(){super.initBounds();}
 
     public PozwolenieNaWjazd(){
-        szerokosc=280;
-        wysokosc=374;
+        szerokosc=150 * SCALE;
+        wysokosc=201 * SCALE;
+        //150 x 201;
         xPos=700;
         yPos=234;
         initBounds();
@@ -73,20 +77,22 @@ public class PozwolenieNaWjazd extends Dokument {
 
         if(e.getX() < 178*SCALE && aktualneZdjecie != maleZdjecieDokumentu && przesuwanieDokumentu){
             aktualneZdjecie = maleZdjecieDokumentu;
-            szerokosc -= 170;
-            wysokosc -= 320;
-            xPos = e.getX()-25;
-            yPos = e.getY()-25;
+            //280 x 374
+            //150 x 201
+            szerokosc -= 100*SCALE;
+            wysokosc -= 180*SCALE;
+            xPos = e.getX()-20*SCALE;
+            yPos = e.getY()-10*SCALE;
             Point punkt = e.getPoint();
             przesuniecieX = punkt.x - xPos;
             przesuniecieY = punkt.y - yPos;
             initBounds();
         } else if (aktualneZdjecie != zdjecieDokumentu && e.getX() >178*SCALE && przesuwanieDokumentu) {
             aktualneZdjecie = zdjecieDokumentu;
-            szerokosc += 170;
-            wysokosc += 320;
-            xPos = e.getX()-70;
-            yPos = e.getY()-90;
+            szerokosc += 100*SCALE;
+            wysokosc += 180*SCALE;
+            xPos = e.getX()-75*SCALE;
+            yPos = e.getY()-95*SCALE;
             Point punkt = e.getPoint();
             przesuniecieX = punkt.x - xPos;
             przesuniecieY = punkt.y - yPos;

@@ -13,6 +13,31 @@ public class WczytywaniePlikow {
 
     //TŁO - DO ODZIELENIA GRA WYGLAD
 
+    //TWARZE
+
+    public static final String TWARZE_KOBIET_DUZE_0 = "SheetF0.png";
+    public static final String TWARZE_KOBIET_DUZE_1 = "faces/SheetF1";
+    public static final String TWARZE_KOBIET_DUZE_2 = "faces/SheetF2";
+    public static final String TWARZE_KOBIET_DUZE_3 = "faces/SheetF3";
+    public static final String TWARZE_KOBIET_DUZE_4 = "faces/SheetF4";
+
+    public static final String TWARZE_KOBIET_MALE_0 = "SheetF0d.png";
+    public static final String TWARZE_KOBIET_MALE_1 = "faces/SheetF1d";
+    public static final String TWARZE_KOBIET_MALE_2 = "faces/SheetF2d";
+    public static final String TWARZE_KOBIET_MALE_3 = "faces/SheetF3d";
+    public static final String TWARZE_KOBIET_MALE_4 = "faces/SheetF4d";
+
+    public static final String TWARZE_MEZCZYZN_DUZE_0 = "";
+    public static final String TWARZE_MEZCZYZN_DUZE_1 = "";
+    public static final String TWARZE_MEZCZYZN_DUZE_2 = "";
+    public static final String TWARZE_MEZCZYZN_DUZE_3 = "";
+    public static final String TWARZE_MEZCZYZN_DUZE_4 = "";
+
+    public static final String TWARZE_MEZCZYZN_MALE_0 = "";
+    public static final String TWARZE_MEZCZYZN_MALE_1 = "";
+    public static final String TWARZE_MEZCZYZN_MALE_2 = "";
+    public static final String TWARZE_MEZCZYZN_MALE_3 = "";
+    public static final String TWARZE_MEZCZYZN_MALE_4 = "";
 
     //DOKUMENTY
     public static final String PASZPORT_ARZTOCKA_DUZY = "PassportInnerArstotzka.png";

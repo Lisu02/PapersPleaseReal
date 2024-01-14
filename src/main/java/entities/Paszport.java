@@ -31,7 +31,7 @@ public class Paszport extends Dokument{
     //OBRAZY NA PASZPORCIE
     private BufferedImage zdjeciePaszportowe;
     private BufferedImage zdjecieDecyzjiZatwierdzeniaPaszportu;
-    private final Font fontDokumentow = WczytywaniePlikow.wczytajFont(WczytywaniePlikow.FONT_DO_DOKUMENTOW,15f);
+    //private final Font fontDokumentow = WczytywaniePlikow.wczytajFont(WczytywaniePlikow.FONT_DO_DOKUMENTOW,15f);
 
 
     //wieklość i lokalizacja paszportu
@@ -47,8 +47,8 @@ public class Paszport extends Dokument{
 
     public Paszport(){
         //Lokalizacja paszportu
-        xPos = 400;
-        yPos = 234;
+        xPos = 178*SCALE + 10;
+        yPos = 103*SCALE + 10;
         //Stan paszportu (czy w wersji małej czy dużej)
 
         this.imie = getImie();
@@ -58,6 +58,7 @@ public class Paszport extends Dokument{
         this.miejsceWydania = "Bialystok";
         this.dataWaznosci = "31/03/2015";
         this.kodPaszportu = "ABCD-1234";
+        initBounds();
     }
 
     public void aktualizuj(){
@@ -74,10 +75,12 @@ public class Paszport extends Dokument{
             g.setColor(new Color(87,72,72));
             g.setFont(fontDokumentow);
             String fullname = this.imie + ", " + this.nazwisko;
+            //130 x 162\
+//            int imieX = (xPos + 15),imieY = (yPos + (187*(SCALE-1)) );
 
-            int imieX = xPos + 15,imieY = yPos + 187;
-            int daneX = xPos + 135,daneY = yPos + 208;
-            int kodX = xPos + 15,kodY = yPos + 308;
+            int imieX = (xPos + 6*SCALE),imieY = (yPos + (93*SCALE) );
+            int daneX = (xPos + 67*SCALE),daneY = (yPos + (105*SCALE));
+            int kodX = (xPos + 6*SCALE),kodY = (yPos + (155*SCALE));
 
             switch (krajPochodzenia.toUpperCase()){
                 case "ARSTOTZKA":
@@ -97,10 +100,10 @@ public class Paszport extends Dokument{
             }
 
             g.drawString(fullname,imieX,imieY);
-            g.drawString(dataUrodzenia,daneX,daneY);
-            g.drawString(plec,daneX,daneY + 15);
-            g.drawString(miejsceWydania,daneX,daneY + 30);
-            g.drawString(dataWaznosci,daneX,daneY + 48);
+            g.drawString(dataUrodzenia,daneX ,daneY + 1*SCALE);
+            g.drawString(plec,daneX,daneY + 8*SCALE);
+            g.drawString(miejsceWydania,daneX,daneY + 16*SCALE);
+            g.drawString(dataWaznosci,daneX,daneY + 24*SCALE);
             g.drawString(kodPaszportu,kodX,kodY);
 
         }
@@ -124,23 +127,29 @@ public class Paszport extends Dokument{
     @Override
     public void mouseDragged(MouseEvent e){
         super.mouseDragged(e);
-
+        // szerokosc=260,wysokosc=324;
+        // 70   X   94
+        // 130x162
+        // 36 x 52
+        // 42 WYS X 36
+//        szerokosc -= 190;
+//        wysokosc -= 230;
         if(e.getX() < 178*SCALE && aktualneZdjecie != maleZdjecieDokumentu && przesuwanieDokumentu){
             aktualneZdjecie = maleZdjecieDokumentu;
-            szerokosc -= 190;
-            wysokosc -= 230;
-            xPos = e.getX()-25;
-            yPos = e.getY()-25;
+            szerokosc -= 98*SCALE;
+            wysokosc -= 120*SCALE;
+            xPos = e.getX()-(20*SCALE);
+            yPos = e.getY()-(20*SCALE);
             Point punkt = e.getPoint();
             przesuniecieX = punkt.x - xPos;
             przesuniecieY = punkt.y - yPos;
             initBounds();
         } else if (aktualneZdjecie != zdjecieDokumentu && e.getX() >178*SCALE && przesuwanieDokumentu) {
             aktualneZdjecie = zdjecieDokumentu;
-            szerokosc += 190;
-            wysokosc += 230;
-            xPos = e.getX()-70;
-            yPos = e.getY()-90;
+            szerokosc += 98*SCALE;
+            wysokosc += 120*SCALE;
+            xPos = e.getX()-(45*SCALE);
+            yPos = e.getY()-(55*SCALE);
             Point punkt = e.getPoint();
             przesuniecieX = punkt.x - xPos;
             przesuniecieY = punkt.y - yPos;

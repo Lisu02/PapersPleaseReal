@@ -10,8 +10,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-import static org.main.Gra.GAME_HEIGHT;
-import static org.main.Gra.GAME_WIDTH;
+import static org.main.Gra.*;
 
 public abstract class Dokument implements MouseMotionListener, MouseListener {
 
@@ -19,12 +18,12 @@ public abstract class Dokument implements MouseMotionListener, MouseListener {
     protected BufferedImage aktualneZdjecie;
     protected BufferedImage zdjecieDokumentu;
     protected BufferedImage maleZdjecieDokumentu;
-    protected final Font fontDokumentow = WczytywaniePlikow.wczytajFont(WczytywaniePlikow.FONT_DO_DOKUMENTOW,15f);
-
+    protected final Font fontDokumentow = WczytywaniePlikow.wczytajFont(WczytywaniePlikow.FONT_DO_DOKUMENTOW,8f * SCALE ); //CZCIONKA 24 dla 3 oraz 16 dla 2
 
     //wieklość i lokalizacja paszportu
     protected int xPos = 300,yPos = 300;
-    protected int szerokosc=260,wysokosc=324;
+    protected int szerokosc=130 * SCALE,wysokosc=162 * SCALE;
+    //130 x 162
     protected Rectangle bounds;
 
     protected boolean przesuwanieDokumentu = false;
@@ -39,7 +38,8 @@ public abstract class Dokument implements MouseMotionListener, MouseListener {
     }
 
     protected void wczytajObrazDokumentu(){
-        BufferedImage img = WczytywaniePlikow.GetSpriteAtlas("PassportInnerArstotzka.png");
+        //PassportInnerArstotzka
+        BufferedImage img = WczytywaniePlikow.GetSpriteAtlas("faces/SheetF0.png");
         zdjecieDokumentu = img;
     }
 
@@ -81,11 +81,13 @@ public abstract class Dokument implements MouseMotionListener, MouseListener {
             maleZdjecieDokumentu =imgSmall;
             aktualneZdjecie = zdjecieDokumentu;
         }
+        //fontDokumentow.deriveFont(Font.BOLD);
 
     }
 
     public void aktualizuj(){
-        initBounds();
+
+        //initBounds();
     }
 
     public void renderuj(Graphics g){
@@ -113,10 +115,10 @@ public abstract class Dokument implements MouseMotionListener, MouseListener {
     }
     @Override
     public void mousePressed(MouseEvent e) {
-
+        initBounds();
         Point punkt = e.getPoint();
         if (getBounds().contains(punkt)) {
-            Dzwieki.addDzwieki(Dzwieki.PODNOSZENIE_KARTKI_0);
+            Dzwieki.addDzwieki(Dzwieki.PODNOSZENIE_KARTKI_0); //TODO: ZOPTYMALIZOWAĆ ZAJMUJE ZA DUŻO CZASU WCZYTYWANIE DZWIEKÓW W LOCIE
             Dzwieki.odtworzDzwiek();
             przesuwanieDokumentu = true;
             przesuniecieX = punkt.x - xPos;
@@ -127,7 +129,7 @@ public abstract class Dokument implements MouseMotionListener, MouseListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         Random random = new Random();
-
+        initBounds();
         if(przesuwanieDokumentu){
 //            Dzwieki.addDzwieki(Dzwieki.OPUSZCZANIE_KARTKI_0);
 //            Dzwieki.odtworzDzwiek();
@@ -142,6 +144,7 @@ public abstract class Dokument implements MouseMotionListener, MouseListener {
     }
     @Override
     public void mouseDragged(MouseEvent e) {
+        initBounds();
             if (przesuwanieDokumentu) {
                 int noweX = e.getX() - przesuniecieX;
                 int noweY = e.getY() - przesuniecieY;

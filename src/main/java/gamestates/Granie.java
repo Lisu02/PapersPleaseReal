@@ -8,6 +8,7 @@ import utils.Stale;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.LinkedList;
 
 public class Granie extends Stan implements Metodystanu {
 
@@ -18,7 +19,7 @@ public class Granie extends Stan implements Metodystanu {
     private PozwolenieNaWjazd pozwolenieNaWjazd;
     private DowodOsobisty dowodOsobisty;
 
-
+    private LinkedList<Dokument> dokumentLinkedList = new LinkedList<>();
 
 
     private RamieZatwierdzaniaOdrzucania ramie;
@@ -45,14 +46,18 @@ public class Granie extends Stan implements Metodystanu {
         pozwolenieNaWjazd = new PozwolenieNaWjazd();
         ramie = new RamieZatwierdzaniaOdrzucania();
         dowodOsobisty = new DowodOsobisty();
+        dokumentLinkedList.addAll(petent.getDokumentList());
     }
 
     @Override
     public void aktualizuj() {
         handlerPoziomu.aktualizuj(); //Aktualizowanie dynamicznego tła
-        pozwolenieNaWjazd.aktualizuj();
-        paszport.aktualizuj();
-        dowodOsobisty.aktualizuj();
+        for(Dokument dokument: dokumentLinkedList){
+            dokument.aktualizuj();
+        }
+        //pozwolenieNaWjazd.aktualizuj();
+        //paszport.aktualizuj();
+        //dowodOsobisty.aktualizuj();
 
         for (GraPrzycisk gp: przyciski){
             gp.update();
@@ -62,10 +67,13 @@ public class Granie extends Stan implements Metodystanu {
     @Override
     public void rysuj(Graphics g) {
         handlerPoziomu.rysuj(g);
-        pozwolenieNaWjazd.renderuj(g);
-        paszport.renderuj(g);
-        ramie.renderuj(g);
-        dowodOsobisty.renderuj(g);
+        for(Dokument dokument: dokumentLinkedList){
+            dokument.renderuj(g);
+        }
+        //pozwolenieNaWjazd.renderuj(g);
+        //paszport.renderuj(g);
+        //ramie.renderuj(g);
+        //dowodOsobisty.renderuj(g);
 
 
         for(GraPrzycisk gp : przyciski){
@@ -90,36 +98,71 @@ public class Granie extends Stan implements Metodystanu {
                 break;
             }
         }
-        if(isIn(e,paszport)){
-            System.out.println("Wcisniety paszport");
-            paszport.mousePressed(e);
+
+        for(Dokument dokument: dokumentLinkedList){
+            if(isIn(e,dokument)){
+                dokument.mousePressed(e);
+                Dokument dokumentTmp;
+                dokumentTmp = dokument;
+                dokumentLinkedList.remove(dokument);
+                dokumentLinkedList.add(dokumentTmp);
+                dokumentLinkedList.push(dokumentTmp); //TODO:POPRAWIC
+                System.out.println(dokumentLinkedList.size()); //WIADOMO
+
+                break;
+            }
         }
 
-        if(isIn(e,pozwolenieNaWjazd)){
-            pozwolenieNaWjazd.mousePressed(e);
-        }
 
-        if(isIn(e,dowodOsobisty)){
-            dowodOsobisty.mousePressed(e);
-        }
+
+//        if(isIn(e,paszport)){
+//            System.out.println("Wcisniety paszport");
+//            paszport.mousePressed(e);
+//        }
+//
+//        if(isIn(e,pozwolenieNaWjazd)){
+//            pozwolenieNaWjazd.mousePressed(e);
+//        }
+//
+//        if(isIn(e,dowodOsobisty)){
+//            dowodOsobisty.mousePressed(e);
+//        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
 
+        for(Dokument dokument: dokumentLinkedList){
+            if(isIn(e,dokument)){
+                dokument.mouseReleased(e);
+                //TODO: DO POPRAWY BADZIEWIE JEDNE
+                Dokument dokumentTmp;
+                dokumentTmp = dokument;
+//                dokumentLinkedList.remove(dokument);
+//                dokumentLinkedList.add(dokumentTmp);
+//                dokumentLinkedList.push(dokumentTmp);
+                System.out.println(dokumentLinkedList.size()); //WIADOMO
+                System.out.println(dokumentLinkedList.toString());
+                break;
+            }
+        }
+
         for(GraPrzycisk gp : przyciski){
             if(isIn(e,gp)){
                 if(gp.isMousePressed()){
                     Petent petent = new Petent();
-                    paszport = petent.getPaszport();
+                    //paszport = petent.getPaszport();
+                    dokumentLinkedList = (LinkedList<Dokument>) petent.getDokumentList();
                     break;
                 }
             }
         }
         resetButtons();
-        paszport.mouseReleased(e);
-        pozwolenieNaWjazd.mouseReleased(e);
-        dowodOsobisty.mouseReleased(e);
+
+
+//        paszport.mouseReleased(e);
+//        pozwolenieNaWjazd.mouseReleased(e);
+//        dowodOsobisty.mouseReleased(e);
     }
 
     private void resetButtons() {
@@ -144,16 +187,27 @@ public class Granie extends Stan implements Metodystanu {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if(isIn(e,paszport)){
-            paszport.mouseDragged(e);
-        }
+//        if(isIn(e,paszport)){
+//            paszport.mouseDragged(e);
+//        }
+//
+//        if(isIn(e,pozwolenieNaWjazd)){
+//            pozwolenieNaWjazd.mouseDragged(e);
+//        }
+//
+//        if(isIn(e,dowodOsobisty)){
+//            dowodOsobisty.mouseDragged(e);
+//        }
 
-        if(isIn(e,pozwolenieNaWjazd)){
-            pozwolenieNaWjazd.mouseDragged(e);
-        }
-
-        if(isIn(e,dowodOsobisty)){
-            dowodOsobisty.mouseDragged(e);
+        for(Dokument dokument: dokumentLinkedList){
+            if(isIn(e,dokument)){
+                dokument.mouseDragged(e);
+//                Dokument dokumentTmp;
+//                dokumentTmp = dokument;
+//                dokumentLinkedList.push(dokument);
+//                dokumentLinkedList.add(dokumentTmp);
+                break;
+            }
         }
     }
 
