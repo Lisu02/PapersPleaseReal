@@ -9,8 +9,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
-import static org.main.Gra.GAME_HEIGHT;
-import static org.main.Gra.GAME_WIDTH;
+import static org.main.Gra.*;
 import static utils.WczytywaniePlikow.POZWOLENIE_NA_WJAZD_DUZY;
 import static utils.WczytywaniePlikow.POZWOLENIE_NA_WJAZD_MALY;
 
@@ -72,7 +71,7 @@ public class PozwolenieNaWjazd extends Dokument {
     public void mouseDragged(MouseEvent e){
         super.mouseDragged(e);
 
-        if(e.getX() < 390 && aktualneZdjecie != maleZdjecieDokumentu && przesuwanieDokumentu){
+        if(e.getX() < 178*SCALE && aktualneZdjecie != maleZdjecieDokumentu && przesuwanieDokumentu){
             aktualneZdjecie = maleZdjecieDokumentu;
             szerokosc -= 170;
             wysokosc -= 320;
@@ -82,7 +81,7 @@ public class PozwolenieNaWjazd extends Dokument {
             przesuniecieX = punkt.x - xPos;
             przesuniecieY = punkt.y - yPos;
             initBounds();
-        } else if (aktualneZdjecie != zdjecieDokumentu && e.getX() >390 && przesuwanieDokumentu) {
+        } else if (aktualneZdjecie != zdjecieDokumentu && e.getX() >178*SCALE && przesuwanieDokumentu) {
             aktualneZdjecie = zdjecieDokumentu;
             szerokosc += 170;
             wysokosc += 320;

@@ -6,8 +6,7 @@ import utils.WczytywaniePlikow;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static org.main.Gra.GAME_HEIGHT;
-import static org.main.Gra.GAME_WIDTH;
+import static org.main.Gra.*;
 
 public class HandlerPoziomu {
 
@@ -16,8 +15,9 @@ public class HandlerPoziomu {
     private BufferedImage tloGora;
 
     private BufferedImage[] budkaZGlosnikiem = new BufferedImage[2];
-    //private BufferedImage poziomSprite;
-    //private BufferedImage poziomSprite;
+    private BufferedImage scianaBudki;
+    private BufferedImage biurko;
+    private BufferedImage[] wajcha = new BufferedImage[2];
 
 
     private BufferedImage[] tlumSprite = new BufferedImage[4];
@@ -49,11 +49,20 @@ public class HandlerPoziomu {
 
         img = WczytywaniePlikow.GetSpriteAtlas(WczytywaniePlikow.BUDKA);
         budkaZGlosnikiem[0] = img;
+
+        img = WczytywaniePlikow.GetSpriteAtlas(WczytywaniePlikow.SCIANA_BUDKI);
+        scianaBudki = img;
+
+        img = WczytywaniePlikow.GetSpriteAtlas(WczytywaniePlikow.BIURKO);
+        biurko = img;
     }
 
     public void rysuj(Graphics g){
-        g.drawImage(tloGora,0,0,GAME_WIDTH,GAME_HEIGHT/3,null);
-        g.drawImage(budkaZGlosnikiem[indexBudki],325,150,GAME_WIDTH/10,GAME_HEIGHT/4,null);
+        g.drawImage(tloGora,0,0,570*SCALE,103*SCALE,null);
+        g.drawImage(budkaZGlosnikiem[indexBudki],(103*SCALE)+(42*SCALE),(178*SCALE)-(114*SCALE),FINAL_GAME_WIDTH/10,FINAL_GAME_HEIGHT/4,null);
+        g.drawImage(scianaBudki,0,103*SCALE,178*SCALE,135*SCALE,null);
+        g.drawImage(biurko,0,103*SCALE,570*SCALE,217*SCALE,null);
+
 
     }
 

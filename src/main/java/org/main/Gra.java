@@ -16,8 +16,20 @@ public class Gra implements Runnable{
     private Granie granie;
     private Menu menu;
 
-    public final static int GAME_WIDTH = 1280;
-    public final static int GAME_HEIGHT = 720;
+
+
+//    public final static int GAME_WIDTH = 1280;
+//    public final static int GAME_HEIGHT = 720;
+
+    public final static int TRUE_GAME_WIDTH = 570;
+    public final static int TRUE_GAME_HEIGHT = 320;
+    public final static int SCALE = 3;
+    public final static int FINAL_GAME_WIDTH = TRUE_GAME_WIDTH * SCALE;
+    public final static int FINAL_GAME_HEIGHT = TRUE_GAME_HEIGHT * SCALE;
+
+    public final static int GAME_WIDTH = FINAL_GAME_WIDTH;
+    public final static int GAME_HEIGHT = FINAL_GAME_HEIGHT;
+
     public final int FPS_SET = 120;
     private final int UPS_SET = 200;
 

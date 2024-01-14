@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import static DaneGryDoGenerowania.Dystrykty.getDystrykt;
+import static org.main.Gra.SCALE;
 import static utils.WczytywaniePlikow.DOWOD_OSOBISTY_DUZY;
 import static utils.WczytywaniePlikow.DOWOD_OSOBISTY_MALY;
 
@@ -79,7 +80,7 @@ public class DowodOsobisty extends Dokument{
 
 
 
-        if(e.getX() < 390 && aktualneZdjecie != maleZdjecieDokumentu && przesuwanieDokumentu){
+        if(e.getX() < 178*SCALE && aktualneZdjecie != maleZdjecieDokumentu && przesuwanieDokumentu){
             aktualneZdjecie = maleZdjecieDokumentu;
             szerokosc -= 160;
             wysokosc -= 100;
@@ -89,7 +90,7 @@ public class DowodOsobisty extends Dokument{
             przesuniecieX = punkt.x - xPos;
             przesuniecieY = punkt.y - yPos;
             initBounds();
-        } else if (aktualneZdjecie != zdjecieDokumentu && e.getX() >390 && przesuwanieDokumentu) {
+        } else if (aktualneZdjecie != zdjecieDokumentu && e.getX() >178*SCALE && przesuwanieDokumentu) {
             aktualneZdjecie = zdjecieDokumentu;
             szerokosc += 160;
             wysokosc += 100;
