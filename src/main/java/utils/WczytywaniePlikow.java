@@ -13,6 +13,15 @@ public class WczytywaniePlikow {
 
     //TŁO - DO ODZIELENIA GRA WYGLAD
 
+    public static final String LOGO_GRY_MENU = "Title.png";
+
+    public static final String INTRO_0 = "Intro0.png";
+    public static final String INTRO_1 = "Intro1.png";
+    public static final String INTRO_2 = "Intro2.png";
+    public static final String INTRO_3 = "Intro3.png";
+
+
+
     //TWARZE
 
     public static final String TWARZE_KOBIET_DUZE_0 = "SheetF0.png";

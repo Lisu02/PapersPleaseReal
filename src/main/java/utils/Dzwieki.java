@@ -12,6 +12,7 @@ public class Dzwieki {
     private static Clip clip;
     private static FloatControl gainControl;
 
+    public static final String GLOWNA_MUZYKA = "src/main/res/audio/Glowna-Muzyka.wav";
 
     public static final String ALARM = "src/main/res/audio/Border-Alarm.wav";
     public static final String PODNOSZENIE_KARTKI_0 = "src/main/res/audio/Paper-Dragstart0.wav";

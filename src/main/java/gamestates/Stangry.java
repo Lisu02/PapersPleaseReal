@@ -4,5 +4,5 @@ public enum Stangry {
 
     GRANIE,MENU,OPTIONS,QUIT;
 
-    public static Stangry state = GRANIE;
+    public static Stangry state = MENU;
 }
