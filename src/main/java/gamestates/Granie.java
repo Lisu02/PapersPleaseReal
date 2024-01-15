@@ -62,6 +62,7 @@ public class Granie extends Stan implements Metodystanu {
         for (GraPrzycisk gp: przyciski){
             gp.update();
         }
+        ramie.update();
     }
 
     @Override
@@ -72,7 +73,7 @@ public class Granie extends Stan implements Metodystanu {
         }
         //pozwolenieNaWjazd.renderuj(g);
         //paszport.renderuj(g);
-        //ramie.renderuj(g);
+        ramie.renderuj(g);
         //dowodOsobisty.renderuj(g);
 
 
@@ -83,7 +84,7 @@ public class Granie extends Stan implements Metodystanu {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        ramie.mouseClicked(e);
 
     }
 
@@ -104,9 +105,14 @@ public class Granie extends Stan implements Metodystanu {
                 dokument.mousePressed(e);
                 Dokument dokumentTmp;
                 dokumentTmp = dokument;
+
                 dokumentLinkedList.remove(dokument);
-                dokumentLinkedList.add(dokumentTmp);
-                dokumentLinkedList.push(dokumentTmp); //TODO:POPRAWIC
+                dokumentLinkedList.addLast(dokumentTmp);
+                dokumentLinkedList.addFirst(dokumentTmp);
+
+                //dokumentLinkedList.remove(dokumentTmp);
+
+                //dokumentLinkedList.push(dokumentTmp); //TODO:POPRAWIC
                 System.out.println(dokumentLinkedList.size()); //WIADOMO
 
                 break;
@@ -138,7 +144,8 @@ public class Granie extends Stan implements Metodystanu {
                 //TODO: DO POPRAWY BADZIEWIE JEDNE
                 Dokument dokumentTmp;
                 dokumentTmp = dokument;
-//                dokumentLinkedList.remove(dokument);
+                // dokumentLinkedList.remove(dokument); //TODO:ROZWIAZANIE?
+                //dokumentLinkedList.remove(dokument);
 //                dokumentLinkedList.add(dokumentTmp);
 //                dokumentLinkedList.push(dokumentTmp);
                 System.out.println(dokumentLinkedList.size()); //WIADOMO
@@ -152,7 +159,7 @@ public class Granie extends Stan implements Metodystanu {
                 if(gp.isMousePressed()){
                     Petent petent = new Petent();
                     //paszport = petent.getPaszport();
-                    dokumentLinkedList = (LinkedList<Dokument>) petent.getDokumentList();
+                    dokumentLinkedList = petent.getDokumentList();
                     break;
                 }
             }

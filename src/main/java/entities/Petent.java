@@ -103,7 +103,7 @@ public class Petent {
     }
 
 
-    public Collection<? extends Dokument> getDokumentList() {
+    public LinkedList<Dokument> getDokumentList() {
         return dokumentLinkedList;
     }
 }

@@ -1,10 +1,12 @@
 package gamestates;
 
 import entities.Dokument;
+import entities.RamieZatwierdzaniaOdrzucania;
 import org.main.Gra;
 import ui.GraPrzycisk;
 import ui.MenuPrzycisk;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class Stan {
@@ -18,6 +20,14 @@ public class Stan {
     }
     public boolean isIn(MouseEvent e, MenuPrzycisk mp){
         return mp.getBounds().contains(e.getX(),e.getY());
+    }
+
+//    public boolean isIn(MouseEvent e, RamieZatwierdzaniaOdrzucania rzo){
+//        return rzo.getBounds().contains(e.getX(),e.getY());
+//    }
+
+    public boolean isIn(MouseEvent e, Rectangle border){
+        return border.getBounds().contains(e.getX(),e.getY());
     }
 
     //public boolean isIn(MouseEvent e, Paszport paszport){return paszport.getBounds().contains(e.getX(),e.getY());}

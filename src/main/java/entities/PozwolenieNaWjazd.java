@@ -1,5 +1,7 @@
 package entities;
 
+import DaneGryDoGenerowania.CelePrzyjazdu;
+import DaneGryDoGenerowania.DataWaznosci;
 import utils.Dzwieki;
 import utils.WczytywaniePlikow;
 
@@ -49,6 +51,9 @@ public class PozwolenieNaWjazd extends Dokument {
         this.imie ="Mykolski";
         this.nazwisko  ="Wladimir";
         wczytajObrazPozwoleniaNaWjazd();
+        this.cel = CelePrzyjazdu.getCelPrzyjazdu();
+        this.czasTrwania = CelePrzyjazdu.getCzasPrzyjazdu(cel);
+        this.dataWaznosci = DataWaznosci.generateRandomDataWaznosciString();
 
     }
 
@@ -69,6 +74,17 @@ public class PozwolenieNaWjazd extends Dokument {
 
     public void renderuj(Graphics g){
         super.renderuj(g);
+        g.setFont(fontDokumentu);
+        if(aktualneZdjecie == zdjecieDokumentu) {
+
+            g.setColor(new Color(130, 114, 148));
+            g.drawString(imie + " " + nazwisko, xPos + 30 * SCALE, yPos + 95 * SCALE);
+            g.drawString(kodPaszportu, xPos + 45 * SCALE, yPos + 128 * SCALE);
+            g.drawString(cel, xPos + 65 * SCALE, yPos + 144 * SCALE);
+            g.drawString(czasTrwania, xPos + 65 * SCALE, yPos + 160 * SCALE);
+            g.drawString(dataWaznosci, xPos + 65 * SCALE, yPos + 175 * SCALE);
+        }
+
     }
 
     @Override

@@ -1,11 +1,13 @@
 package entities;
 
+import DaneGryDoGenerowania.RandomDataUrodzenia;
 import utils.Dzwieki;
 import utils.WczytywaniePlikow;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import static DaneGryDoGenerowania.Dystrykty.getDystrykt;
 import static org.main.Gra.SCALE;
@@ -36,6 +38,11 @@ public class DowodOsobisty extends Dokument{
         initBounds();
         wczytajObrazDokumentu(DOWOD_OSOBISTY_DUZY,DOWOD_OSOBISTY_MALY);
         aktualneZdjecie = zdjecieDokumentu;
+        Random random = new Random();
+        Integer tmp = random.nextInt(65,88);
+        this.waga = tmp.toString();
+        tmp = random.nextInt(158,182);
+        this.wzrost = tmp.toString();
     }
 
     private void wczytajObrazDowodu() {
@@ -72,6 +79,9 @@ public class DowodOsobisty extends Dokument{
             //String fullname = this.imie + ", " + this.nazwisko;
             g.drawString(imie + ",",xPos+(50 * SCALE),yPos +(26*SCALE));
             g.drawString(nazwisko,xPos+(50*SCALE),yPos +(34*SCALE));
+            g.drawString(dataUrodzenia,xPos+(65*SCALE),yPos + (45*SCALE));
+            g.drawString(wzrost + "cm",xPos+(65*SCALE),yPos + (55*SCALE));
+            g.drawString(waga + "kg",xPos+(65*SCALE),yPos + (65*SCALE));
 
         }
     }

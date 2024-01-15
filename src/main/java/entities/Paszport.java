@@ -86,13 +86,16 @@ public class Paszport extends Dokument{
                 case "ARSTOTZKA":
                     break;
                 case "ZJEDNOCZONA FEDERACJA":
-                    imieY = yPos + 315;
-                    daneY = daneY + 17;
+                    imieX = (xPos + 7*SCALE);
+                    imieY = yPos + 104*SCALE;
+                    daneY = daneY + 19;
                     daneX = daneX + 4;
                     kodX += 150;
                     break;
                 case "KOLECHIA":
-                    imieY = yPos + 315;
+                    imieX = (xPos + 7*SCALE);
+                    //315
+                    imieY = yPos + 104*SCALE;
                     daneY = daneY + 19;
                     daneX = daneX + 6;
                     kodX += 150;

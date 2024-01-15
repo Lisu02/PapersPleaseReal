@@ -3,6 +3,7 @@ package utils;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
+import javax.print.DocFlavor;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -71,6 +72,21 @@ public class WczytywaniePlikow {
     public static final String KRATY_DZWIGNIA_UP = "ShutterSwitchUp.png";
     public static final String KRATY_DZWIGNIA_DOWN = "ShutterSwitchDown.png";
     public static final String SCIANA_BUDKI = "BoothWall.png";
+
+
+    //STEPLE
+    public static final String STAMP_BAR_BOT = "stampFolder/StampBarBot.png";
+    public static final String STAMP_BAR_MID = "stampFolder/StampBarMid.png";
+    public static final String STAMP_BAR_TOP = "stampFolder/StampBarTop.png";
+    public static final String STAMP_BOT_APPROVED = "stampFolder/StampBotApproved.png";
+    public static final String STAMP_BOT_DENIED = "stampFolder/StampBotDenied.png";
+    public static final String STAMP_TOP = "stampFolder/StampTop.png";
+
+    public static final String INK_APPROVED = "stampFolder/InkApproved.png";
+    public static final String INK_DENIED = "stampFolder/InkDenied.png";
+
+
+
 
 
     //PRZYCISKI
