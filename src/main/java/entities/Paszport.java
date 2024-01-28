@@ -9,9 +9,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.Collection;
+import java.util.LinkedList;
 
 import static DaneGryDoGenerowania.ImionaPetentow.getImie;
 import static DaneGryDoGenerowania.ImionaPetentow.getNazwisko;
+import static DaneGryDoGenerowania.Twarz.getTwarzMala;
 import static org.main.Gra.*;
 import static utils.Stale.UI.Przyciski.B_HEIGHT;
 import static utils.Stale.UI.Przyciski.B_WIDTH;
@@ -30,7 +32,11 @@ public class Paszport extends Dokument{
 
     //OBRAZY NA PASZPORCIE
     private BufferedImage zdjeciePaszportowe;
-    private BufferedImage zdjecieDecyzjiZatwierdzeniaPaszportu;
+    private BufferedImage approvedStamp = WczytywaniePlikow.GetSpriteAtlas(WczytywaniePlikow.INK_APPROVED);
+    private BufferedImage deniedStamp = WczytywaniePlikow.GetSpriteAtlas(WczytywaniePlikow.INK_DENIED);
+
+    private LinkedList<BufferedImage> stampedList = new LinkedList<>();
+
     //private final Font fontDokumentow = WczytywaniePlikow.wczytajFont(WczytywaniePlikow.FONT_DO_DOKUMENTOW,15f);
 
 
@@ -58,6 +64,7 @@ public class Paszport extends Dokument{
         this.miejsceWydania = "Bialystok";
         this.dataWaznosci = "31/03/2015";
         this.kodPaszportu = "ABCD-1234";
+//        this.zdjeciePaszportowe = getTwarzMala(this.plec);
         initBounds();
     }
 
@@ -84,6 +91,7 @@ public class Paszport extends Dokument{
 
             switch (krajPochodzenia.toUpperCase()){
                 case "ARSTOTZKA":
+                    g.drawImage(zdjeciePaszportowe,daneX-65*SCALE,daneY-17*SCALE,50*SCALE,58*SCALE,null);
                     break;
                 case "ZJEDNOCZONA FEDERACJA":
                     imieX = (xPos + 7*SCALE);
@@ -91,6 +99,7 @@ public class Paszport extends Dokument{
                     daneY = daneY + 19;
                     daneX = daneX + 4;
                     kodX += 150;
+                    g.drawImage(zdjeciePaszportowe,daneX-65*SCALE,daneY-17*SCALE,50*SCALE,58*SCALE,null);
                     break;
                 case "KOLECHIA":
                     imieX = (xPos + 7*SCALE);
@@ -99,7 +108,25 @@ public class Paszport extends Dokument{
                     daneY = daneY + 19;
                     daneX = daneX + 6;
                     kodX += 150;
+                    g.drawImage(zdjeciePaszportowe,daneX-65*SCALE,daneY-17*SCALE,50*SCALE,58*SCALE,null);
                     break;
+            }
+           if(stampedList != null){
+               if(!stampedList.isEmpty()) {
+                   for (BufferedImage img : stampedList) {
+                       g.drawImage(img, xPos + 30*SCALE, yPos + 25*SCALE, 70 * SCALE, 30 * SCALE, null);
+                   }
+               }
+           }
+
+            if(stampedList != null){
+                if(!stampedList.isEmpty())
+                {
+                    for(BufferedImage img: stampedList){
+                        g.drawImage(img,xPos + 30*SCALE,yPos + 25*SCALE,70*SCALE,30*SCALE,null);
+                    }
+                }
+
             }
 
             g.drawString(fullname,imieX,imieY);
@@ -108,6 +135,7 @@ public class Paszport extends Dokument{
             g.drawString(miejsceWydania,daneX,daneY + 16*SCALE);
             g.drawString(dataWaznosci,daneX,daneY + 24*SCALE);
             g.drawString(kodPaszportu,kodX,kodY);
+
 
         }
     }
@@ -123,7 +151,12 @@ public class Paszport extends Dokument{
         this.dataWaznosci = dataWaznosci;
         this.kodPaszportu = kodPaszportu;
         this.krajPochodzenia = krajPochodzenia;
+        this.zdjeciePaszportowe = getTwarzMala(plec);
         wczytajObrazPaszportu(krajPochodzenia);
+    }
+
+    public void ustawTwarz(){
+        this.zdjeciePaszportowe = getTwarzMala(plec);
     }
 
 
@@ -158,6 +191,15 @@ public class Paszport extends Dokument{
             przesuniecieY = punkt.y - yPos;
             initBounds();
         }
+
+    }
+
+    public void addStampApproved(){
+        stampedList.add(approvedStamp);
+    }
+
+    public void addStampDenied(){
+        stampedList.add(deniedStamp);
 
     }
 

@@ -101,6 +101,9 @@ public class Petent {
     public PozwolenieNaWjazd getPozwolenieNaWjazd(){
         return pozwolenieNaWjazd;
     }
+    public String getterPlec(){
+        return plec;
+    }
 
 
     public LinkedList<Dokument> getDokumentList() {

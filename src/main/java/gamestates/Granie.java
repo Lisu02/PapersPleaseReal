@@ -47,6 +47,7 @@ public class Granie extends Stan implements Metodystanu {
         ramie = new RamieZatwierdzaniaOdrzucania();
         dowodOsobisty = new DowodOsobisty();
         dokumentLinkedList.addAll(petent.getDokumentList());
+        ramie.setPetent(petent);
     }
 
     @Override
@@ -157,9 +158,13 @@ public class Granie extends Stan implements Metodystanu {
         for(GraPrzycisk gp : przyciski){
             if(isIn(e,gp)){
                 if(gp.isMousePressed()){
+
                     Petent petent = new Petent();
+                    handlerPoziomu.zmienTwarz(petent.getterPlec());
+                    petent.getPaszport().ustawTwarz();
                     //paszport = petent.getPaszport();
                     dokumentLinkedList = petent.getDokumentList();
+                    ramie.setPetent(petent);
                     break;
                 }
             }

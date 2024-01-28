@@ -39,6 +39,8 @@ public class RamieZatwierdzaniaOdrzucania implements MouseMotionListener, MouseL
     int stampHeightApproved = 121*SCALE,stampTopHeightApproved = 101*SCALE;
     boolean deniedObnizanie = false, approvedObnizanie = false;
 
+    private Petent petent;
+
     private void initBorderBig(){
         border = new Rectangle(290*SCALE,126*SCALE,20*SCALE,60*SCALE);
         borderDenied = new Rectangle(330*SCALE,121*SCALE,75*SCALE,65*SCALE);
@@ -159,6 +161,9 @@ public class RamieZatwierdzaniaOdrzucania implements MouseMotionListener, MouseL
             Dzwieki.addDzwieki(Dzwieki.STEPEL_DOL);
             Dzwieki.odtworzDzwiek();
             obnizStepelDenied();
+            if(isIn(e,petent.getPaszport().getBounds())){
+                petent.getPaszport().addStampDenied();
+            }
 
 
 
@@ -167,6 +172,10 @@ public class RamieZatwierdzaniaOdrzucania implements MouseMotionListener, MouseL
             Dzwieki.addDzwieki(Dzwieki.STEPEL_DOL);
             Dzwieki.odtworzDzwiek();
             obnizStepelApproved();
+            if(isIn(e,petent.getPaszport().getBounds())) {
+                petent.getPaszport().addStampApproved();
+                System.out.println("DENIEDSTAMP");
+            }
         }
 
     }
@@ -224,6 +233,10 @@ public class RamieZatwierdzaniaOdrzucania implements MouseMotionListener, MouseL
     @Override
     public void mouseMoved(MouseEvent e) {
 
+    }
+
+    public void setPetent(Petent petent) {
+        this.petent = petent;
     }
 }
 

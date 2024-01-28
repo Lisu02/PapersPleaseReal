@@ -79,6 +79,11 @@ public class HandlerPoziomu {
 
     }
 
+    public void zmienTwarz(String plec){
+        BufferedImage img = getTwarzDuza(plec);
+        twarzNaSciance = img;
+    }
+
     public void aktualizuj(){
         //Aktualizowanie i nanoszenie zmian na poziom?0
         if(licznik % 30 == 0){
